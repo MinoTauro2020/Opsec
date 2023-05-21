@@ -1,0 +1,8 @@
+Scan subred without nmap
+
+#!/bin/bash 
+for i in $(seq 1 255); do 
+	bash -c "ping -c1 10.10.20.$i >/dev/null 2>&1" && echo -e "host activo => 10.10.20.$i"
+done 
+echo "-----Finalizado-----"
+
