@@ -88,4 +88,87 @@ gpresult /r: Muestra el resultado de la política de grupo aplicada en el equipo
 
 gpupdate /target:computer /wait: Actualiza la configuración de la política de grupo en el equipo y espera a que se complete.
 
+# Información del Sistema
+
+systeminfo: Muestra información detallada sobre el sistema operativo y la configuración del equipo.
+systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"
+
+# Listar las carpetas y sus permisos
+icacls "C:\Ruta\de\la\Carpeta"
+
+# Cambiar los permisos de una carpeta
+icacls "C:\Ruta\de\la\Carpeta" /grant "DOMAIN\Username:(OI)(CI)F"
+
+# Crear un nuevo usuario
+net user NuevoUsuario NuevaContraseña /add
+
+# Agregar un usuario a un grupo
+net localgroup NombreDelGrupo NombreDelUsuario /add
+
+# Crear un nuevo grupo
+net localgroup NombreDelGrupo /add
+
+# Mostrar los usuarios en un grupo
+net localgroup NombreDelGrupo
+
+# Deshabilitar una cuenta de usuario
+net user NombreDelUsuario /active:no
+
+# Mostrar la configuración de la Política de Grupo aplicada
+gpresult /r
+
+# Restablecer las políticas de grupo a los valores predeterminados
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+
+# Crear un nuevo usuario
+net user NuevoUsuario NuevaContraseña /add
+
+# Cambiar contraseña
+net user NombreDelUsuario NuevaContraseña
+
+# Agregar un usuario a un grupo
+net localgroup NombreDelGrupo NombreDelUsuario /add
+
+# Crear un nuevo grupo
+net localgroup NombreDelGrupo /add
+
+# Mostrar los usuarios en un grupo
+net localgroup NombreDelGrupo
+
+# Deshabilitar una cuenta de usuario
+net user NombreDelUsuario /active:no
+
+# Procesos 
+tasklist
+
+# Exportar Eventos
+wevtutil epl Security security_events.xml /q:"*[System/EventID=4643]"
+
+# Informacion de un proceso
+wmic process where ProcessID=1234 get Caption, CommandLine, ParentProcessID
+
+# Permisos de un proceso
+cacls  "C:\Program Files (x86)\Internet Explorer\IEXPLORE.EXE"
+or 
+icacls
+
+# Todas las rutas de los procesos
+wmic process get ExecutablePath
+
+# Procesos info
+wmic process get Caption, ExecutablePath, ProcessId, WorkingSetSize
+
+# Obtener los permisos del archivo ejecutable utilizando icacls
+icacls "%ruta_archivo%" /c /t /q > permisos.txt
+
+# Permisos de un proceso con wmic
+wmic path CIM_LogicalFileSecuritySetting where Path="<ruta_archivo_ejecutable>" get Caption,Path,AllowWrite,AllowExecute /format:list
+
+## PowerShell
+
+# Lectura de Eventos de Auditoría
+
+Get-EventLog -LogName Security -After (Get-Date).AddDays(-1): Muestra los eventos de auditoría de seguridad en el último día.
+
+
 
