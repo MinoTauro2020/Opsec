@@ -161,8 +161,30 @@ wmic process get Caption, ExecutablePath, ProcessId, WorkingSetSize
 # Obtener los permisos del archivo ejecutable utilizando icacls
 icacls "%ruta_archivo%" /c /t /q > permisos.txt
 
+# Obtener información detallada sobre los permisos de un archivo o carpeta
+icacls C:\ruta\archivo.txt
+
+# Obtener información detallada sobre los permisos de una carpeta y sus subcarpetas
+icacls C:\ruta\carpeta /T
+
+# Obtener información detallada sobre los permisos de una carpeta y sus subcarpetas
+icacls C:\ruta\carpeta /T
+
+# Verificar si los permisos se heredan en una carpeta
+icacls C:\ruta\carpeta /C
+
+# Mostrar el propietario de un archivo o carpeta
+icacls C:\ruta\archivo.txt /Q
+
+# Mostrar el propietario de un archivo o carpeta
+icacls C:\ruta\archivo.txt /Q
+
+# Verificar si se han configurado permisos de auditoría en un archivo
+icacls C:\ruta\archivo.txt /getintegritylevel
+
 # Permisos de un proceso con wmic
 wmic path CIM_LogicalFileSecuritySetting where Path="<ruta_archivo_ejecutable>" get Caption,Path,AllowWrite,AllowExecute /format:list
+
 
 ## PowerShell
 
